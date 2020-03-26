@@ -38,7 +38,7 @@ jobs:
           
     # Deploy your container to App Service ******************************
     - name: Deploy Container to Azure App Service
-      uses: azure/webapps-deploy@releases/v2
+      uses: azure/webapps-container-deploy@v1
       with:
         app-name: 'jefmarti-aspnet-fw-ad'
         images: 'jefmartiregistryad.azurecr.io/dotnetframeworkwc:${{ github.sha }}'
