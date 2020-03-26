@@ -15,10 +15,10 @@ jobs:
     - uses: actions/checkout@v1
     
     # Authenticate a Service Principal to continuously deploy to your provisioned app service
-    #- name: Azure Authentication
-    #  uses: azure/login@v1
-    #  with:
-    #      creds: ${{ secrets.AZURE_CREDENTIALS }}
+    - name: Azure Authentication
+      uses: azure/login@v1
+      with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
                
     # Use docker login to log into ACR *********************************
     - name: Docker login to ACR
@@ -37,11 +37,11 @@ jobs:
            
           
     # Deploy your container to App Service ******************************
-   # - name: Deploy Container to Azure App Service
-   #   uses: azure/webapps-deploy@v2
-   #   with:
-   #     app-name: 'jefmarti-dotnet-framework-wc'
-   #     images: 'jefmartiregistry.azurecr.io/dotnetframeworkwc:${{ github.sha }}'
+    - name: Deploy Container to Azure App Service
+      uses: azure/webapps-deploy@v2
+      with:
+        app-name: 'jefmarti-aspnet-fw-ad'
+        images: 'jefmartiregistryad.azurecr.io/dotnetframeworkwc:${{ github.sha }}'
         
     # Deploy a dacpac file to a provisioned SQL server
 #    - name: Azure SQL Deploy
