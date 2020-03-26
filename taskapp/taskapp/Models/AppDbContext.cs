@@ -8,7 +8,7 @@ namespace taskapp.Models
 {
     public class AppDbContext : DbContext
     {
-        public AppDbContext() : base("name=MyAzureConnection")
+        public AppDbContext() : base("name=AZURECONSTRING")
         {
         }
 
