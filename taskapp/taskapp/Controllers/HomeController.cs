@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -10,12 +11,13 @@ namespace taskapp.Controllers
     {
         public ActionResult Index()
         {
+            ViewBag.Message = "Key vault value = " + ConfigurationManager.AppSettings["AZURECONSTRING"];
             return View();
         }
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            
 
             return View();
         }
