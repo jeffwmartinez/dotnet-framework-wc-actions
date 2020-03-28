@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.Azure.KeyVault;
+using Microsoft.Azure.Services.AppAuthentication;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
@@ -11,7 +13,7 @@ namespace taskapp.Controllers
     {
         public ActionResult Index()
         {
-            ViewBag.Message = "Key vault value = " + ConfigurationManager.AppSettings["AZURECONSTRING"];
+            //ViewBag.Message = "Key vault value = " + ConfigurationManager.AppSettings["AZURECONSTRING"];
             return View();
         }
 

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.Azure.KeyVault;
+using Microsoft.Azure.Services.AppAuthentication;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -20,8 +22,8 @@ namespace taskapp.Controllers
             return View(db.Tasks.ToList());
         }
 
-        // GET: TaskItems/Details/5
-        public ActionResult Details(int? id)
+    // GET: TaskItems/Details/5
+    public ActionResult Details(int? id)
         {
             if (id == null)
             {
