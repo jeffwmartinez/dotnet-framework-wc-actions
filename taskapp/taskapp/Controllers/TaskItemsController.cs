@@ -17,36 +17,10 @@ namespace taskapp.Controllers
         private AppDbContext db = new AppDbContext();
 
         // GET: TaskItems
-        //public ActionResult Index()
-        //{
-        //    return View(db.Tasks.ToList());
-        //}
-
-        public async System.Threading.Tasks.Task<ActionResult> Index()
+        public ActionResult Index()
         {
-            AzureServiceTokenProvider azureServiceTokenProvider = new AzureServiceTokenProvider();
-
-            try
-            {
-                var keyVaultClient = new KeyVaultClient(
-                    new KeyVaultClient.AuthenticationCallback(azureServiceTokenProvider.KeyVaultTokenCallback));
-
-                var secret = await keyVaultClient.GetSecretAsync("https://jefmartikeyvaultad.vault.azure.net/secrets/secret")
-                    .ConfigureAwait(false);
-
-                ViewBag.Secret = $"Secret: {secret.Value}";
-
-            }
-            catch (Exception exp)
-            {
-                ViewBag.Error = $"Something went wrong: {exp.Message}";
-            }
-
-            ViewBag.Principal = azureServiceTokenProvider.PrincipalUsed != null ? $"Principal Used: {azureServiceTokenProvider.PrincipalUsed}" : string.Empty;
-
             return View(db.Tasks.ToList());
         }
-
 
         // GET: TaskItems/Details/5
         public ActionResult Details(int? id)
