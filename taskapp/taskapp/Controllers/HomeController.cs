@@ -13,14 +13,12 @@ namespace taskapp.Controllers
     {
         public ActionResult Index()
         {
-            //ViewBag.Message = "Key vault value = " + ConfigurationManager.AppSettings["AZURECONSTRING"];
+            ViewBag.Message = "Key vault value = " + ConfigurationManager.ConnectionStrings["AZURECONSTRING"];
             return View();
         }
 
         public ActionResult About()
         {
-            
-
             return View();
         }
 
