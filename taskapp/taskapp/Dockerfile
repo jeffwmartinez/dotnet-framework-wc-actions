@@ -14,7 +14,6 @@ RUN nuget restore taskapp/taskapp/packages.config -PackagesDirectory taskapp/pac
 
 
 # BUILD THE PROJECT | # Copy in what's in our source from the current directory ---->>> to the target directory inside of the container | build your project in release mode on as many processors available | Deploy on Build the project so it will do the publish step associated with the build
-#WORKDIR "/src"
 COPY . .
 WORKDIR /src/taskapp/taskapp
 RUN msbuild taskapp.csproj /p:Configuration=Release /m /p:DeployOnBuild=true /p:PublishProfile=FolderProfile
