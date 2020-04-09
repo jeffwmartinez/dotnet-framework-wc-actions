@@ -24,24 +24,22 @@ jobs:
     - name: Docker login to ACR
       uses: azure/docker-login@v1
       with:
-        login-server: jefmartiregistryad.azurecr.io
+        login-server: jefmartiregistry.azurecr.io
         username: ${{ secrets.REGISTRY_USERNAME }}
         password: ${{ secrets.REGISTRY_PASSWORD }}
         
     # Build and push the image to Azure Container Registry **************
     - name: Build and Push container to ACR
       run: |
-        docker build --file=taskapp/taskapp/Dockerfile -t jefmartiregistryad.azurecr.io/dotnetframeworkwc:${{ github.sha }} .
-        docker push jefmartiregistryad.azurecr.io/dotnetframeworkwc:${{ github.sha }}  
-     #   docker build -t jefmartiregistry.azurecr.io/dotnetframeworkwc:${{ github.sha }} dotnetwindowsapp/dotnetwindowsapp/
-           
+        docker build --file=taskapp/taskapp/Dockerfile -t jefmartiregistry.azurecr.io/dotnetframeworkwc:${{ github.sha }} .
+        docker push jefmartiregistry.azurecr.io/dotnetframeworkwc:${{ github.sha }}  
           
     # Deploy your container to App Service ******************************
     - name: Deploy Container to Azure App Service
       uses: azure/webapps-container-deploy@v1
       with:
-        app-name: 'jefmarti-aspnet-fw-ad'
-        images: 'jefmartiregistryad.azurecr.io/dotnetframeworkwc:${{ github.sha }}'
+        app-name: 'jefmarti-dotnet-fw-wc'
+        images: 'jefmartiregistry.azurecr.io/dotnetframeworkwc:${{ github.sha }}'
         
     # Deploy a dacpac file to a provisioned SQL server
 #    - name: Azure SQL Deploy
