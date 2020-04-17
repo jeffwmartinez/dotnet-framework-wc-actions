@@ -28,13 +28,13 @@ jobs:
         username: ${{ secrets.REGISTRY_USERNAME }}
         password: ${{ secrets.REGISTRY_PASSWORD }}
         
-    # Build and push the image to Azure Container Registry **************
+    # Build and push the image to Azure Container Registry 
     - name: Build and Push container to ACR
       run: |
         docker build --file=taskapp/taskapp/Dockerfile -t jefmartiregistry.azurecr.io/dotnetframeworkwc:${{ github.sha }} .
         docker push jefmartiregistry.azurecr.io/dotnetframeworkwc:${{ github.sha }}  
           
-    # Deploy your container to App Service ******************************
+    # Deploy your container to App Service 
     - name: Deploy Container to Azure App Service
       uses: azure/webapps-container-deploy@v1
       with:
@@ -42,9 +42,9 @@ jobs:
         images: 'jefmartiregistry.azurecr.io/dotnetframeworkwc:${{ github.sha }}'
         
     # Deploy a dacpac file to a provisioned SQL server
-#    - name: Azure SQL Deploy
-#      uses: Azure/sql-action@v1
-#      with:
-#        server-name: jefmartiserv.database.windows.net
-#        connection-string: ${{ secrets.AZURE_SQL_CONNECTION_STRING }}
-#        dacpac-package: './data.dacpac'
+    - name: Azure SQL Deploy
+      uses: Azure/sql-action@v1
+      with:
+        server-name: jefmartiserv.database.windows.net
+        connection-string: ${{ secrets.AZURE_SQL_CONNECTION_STRING }}
+        dacpac-package: './data.dacpac'
