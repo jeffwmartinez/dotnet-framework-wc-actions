@@ -4,7 +4,7 @@ A containerized (Windows) .NET Framework Task App setup with continuous deployme
 ## Directions
 1. To use this repository, *fork the repo* 
 2. *Provision appropriate resources* in Azure and/or Docker Hub
-3. *Replace the github secrets variables with your own secrets* appropriate from each Azure resource:<br/>
+3. *Replace the github secrets variables with your own secrets* appropriate from each resource:<br/>
 
       - APP_NAME = your web apps name
       - AZURE_CREDENTIALS = your service principal output
