@@ -1,12 +1,13 @@
 name: Build and Deploy Windows Container App to Azure App Service
 
+# Trigger the build on commits into the master branch
 on:
   push:
     branches:
       - master
 
 jobs:
-  build-and-deploy-to-dev:
+  build-and-deploy-to-azure:
     runs-on: windows-latest
     
     steps:
@@ -14,37 +15,37 @@ jobs:
     # Check out the repo to the app service VMs
     - uses: actions/checkout@v1
     
-    # Authenticate a Service Principal to continuously deploy to your provisioned app service
+    # Authenticate a Service Principal to deploy to your Web App
     - name: Azure Authentication
       uses: azure/login@v1
       with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
                
-    # Use docker login to log into ACR *********************************
+    # Use docker login to log into ACR 
     - name: Docker login to ACR
       uses: azure/docker-login@v1
       with:
-        login-server: jefmartiregistry.azurecr.io
+        login-server: ${{ secrets.REGISTRY_NAME }}.azurecr.io
         username: ${{ secrets.REGISTRY_USERNAME }}
         password: ${{ secrets.REGISTRY_PASSWORD }}
         
     # Build and push the image to Azure Container Registry 
     - name: Build and Push container to ACR
       run: |
-        docker build --file=taskapp/taskapp/Dockerfile -t jefmartiregistry.azurecr.io/dotnetframeworkwc:${{ github.sha }} .
-        docker push jefmartiregistry.azurecr.io/dotnetframeworkwc:${{ github.sha }}  
+        docker build --file=taskapp/taskapp/Dockerfile -t ${{ secrets.REGISTRY_NAME }}.azurecr.io/${{ secrets.IMAGE_NAME }}:${{ github.sha }} .
+        docker push ${{ secrets.REGISTRY_NAME }}.azurecr.io/${{ secrets.IMAGE_NAME }}:${{ github.sha }}  
           
     # Deploy your container to App Service 
     - name: Deploy Container to Azure App Service
       uses: azure/webapps-container-deploy@v1
       with:
-        app-name: 'jefmarti-dotnet-fw-wc'
-        images: 'jefmartiregistry.azurecr.io/dotnetframeworkwc:${{ github.sha }}'
+        app-name: ${{ secrets.APP_NAME }}
+        images: ${{ secrets.REGISTRY_NAME }}.azurecr.io/dotnetframeworkwc:${{ github.sha }}
         
-    # Deploy a dacpac file to a provisioned SQL server
+    # Deploy a dacpac file to your SQL server
     - name: Azure SQL Deploy
       uses: Azure/sql-action@v1
       with:
-        server-name: jefmartiserv.database.windows.net
+        server-name: ${{ secrets.DATABASE_SERVER_NAME }}.database.windows.net
         connection-string: ${{ secrets.AZURE_SQL_CONNECTION_STRING }}
         dacpac-package: './data.dacpac'
