@@ -1,5 +1,5 @@
-# dotnet-framework-wc
-A containerized (Windows) .NET Framework Task App setup with continuous delivery through **GitHub Actions** to Azure App Service.
+# .NET Framework Sample w/ Continuous Deployment
+A containerized (Windows) .NET Framework Task App setup with continuous deployment through **GitHub Actions** to Azure App Service.
 
 ## Directions
 1. Fork the repository.
