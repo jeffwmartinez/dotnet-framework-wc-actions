@@ -34,7 +34,22 @@ jobs:
       run: |
         docker build --file=taskapp/taskapp/Dockerfile -t ${{ secrets.REGISTRY_NAME }}.azurecr.io/${{ secrets.IMAGE_NAME }}:${{ github.sha }} .
         docker push ${{ secrets.REGISTRY_NAME }}.azurecr.io/${{ secrets.IMAGE_NAME }}:${{ github.sha }}  
-          
+       
+  # **** UNCOMMENT IF USING DOCKER HUB **** 
+    # Use docker login
+    #- name: Docker login to ACR
+    #  uses: azure/docker-login@v1
+    #  with:
+    #    username: ${{ secrets.DOCKERHUB_USERNAME }}
+    #    password: ${{ secrets.DOCKERHUB_PASSWORD }}
+        
+    # Build and push your image to Docker Hub
+    #- name: Build and Push container to Docker Hub
+    #  run: |
+    #    docker build --file=taskapp/taskapp/Dockerfile -t ${{ secrets.DOCKERHUB_REGISTRY_NAME }}/${{ secrets.IMAGE_NAME }}:${{ github.sha }} .
+    #    docker push ${{ secrets.DOCKERHUB_REGISTRY_NAME }}/${{ secrets.IMAGE_NAME }}:${{ github.sha }}  
+  # ***************************************      
+      
     # Deploy your container to App Service 
     - name: Deploy Container to Azure App Service
       uses: azure/webapps-container-deploy@v1
