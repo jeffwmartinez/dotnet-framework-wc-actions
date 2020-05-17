@@ -40,7 +40,7 @@ jobs:
       uses: azure/webapps-container-deploy@v1
       with:
         app-name: ${{ secrets.APP_NAME }}
-        images: ${{ secrets.REGISTRY_NAME }}.azurecr.io/dotnetframeworkwc:${{ github.sha }}
+        images: ${{ secrets.REGISTRY_NAME }}.azurecr.io/${{ secrets.IMAGE_NAME }}:${{ github.sha }}
         
     # Deploy a dacpac file to your SQL server
     - name: Azure SQL Deploy
