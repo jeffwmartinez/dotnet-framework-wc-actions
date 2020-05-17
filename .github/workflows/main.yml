@@ -29,7 +29,7 @@ jobs:
         username: ${{ secrets.REGISTRY_USERNAME }}
         password: ${{ secrets.REGISTRY_PASSWORD }}
         
-    # Build and push the image to Azure Container Registry 
+    # Build and push your image to Azure Container Registry 
     - name: Build and Push container to ACR
       run: |
         docker build --file=taskapp/taskapp/Dockerfile -t ${{ secrets.REGISTRY_NAME }}.azurecr.io/${{ secrets.IMAGE_NAME }}:${{ github.sha }} .
