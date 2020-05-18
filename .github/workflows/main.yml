@@ -6,17 +6,18 @@ on:
     branches:
       - master
 
+# Starts jobs and sets the type of runner (Windows) they will run on
 jobs:
   build-and-deploy-to-azure:
     runs-on: windows-latest
     
     steps:
       
-    # Check out the repo to the app service VMs
+    # Checks out repository so your workflow can access it
     - uses: actions/checkout@v1
     
     # Authenticate a Service Principal to deploy to your Web App
-    - name: Azure Authentication
+    - name: Azure Service Principal Authentication
       uses: azure/login@v1
       with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
@@ -57,6 +58,14 @@ jobs:
         app-name: ${{ secrets.APP_NAME }}
         images: ${{ secrets.REGISTRY_NAME }}.azurecr.io/${{ secrets.IMAGE_NAME }}:${{ github.sha }}
         
+  # **** UNCOMMENT IF USING DOCKER HUB **** 
+    #- name: Deploy Container to Azure App Service
+    #  uses: azure/webapps-container-deploy@v1
+    #  with:
+    #    app-name: ${{ secrets.APP_NAME }}
+    #    images: ${{ secrets.DOCKERHUB_REGISTRY_NAME }}/${{ secrets.IMAGE_NAME }}:${{ github.sha }}
+  # *************************************** 
+    
     # Deploy a dacpac file to your SQL server
     - name: Azure SQL Deploy
       uses: Azure/sql-action@v1
