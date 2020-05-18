@@ -26,15 +26,15 @@ jobs:
     - name: Docker login to ACR
       uses: azure/docker-login@v1
       with:
-        login-server: ${{ secrets.REGISTRY_NAME }}.azurecr.io
+        login-server: ${{ secrets.REGISTRY_USERNAME }}.azurecr.io
         username: ${{ secrets.REGISTRY_USERNAME }}
         password: ${{ secrets.REGISTRY_PASSWORD }}
         
     # Build and push your image to Azure Container Registry 
     - name: Build and Push container to ACR
       run: |
-        docker build --file=taskapp/taskapp/Dockerfile -t ${{ secrets.REGISTRY_NAME }}.azurecr.io/${{ secrets.IMAGE_NAME }}:${{ github.sha }} .
-        docker push ${{ secrets.REGISTRY_NAME }}.azurecr.io/${{ secrets.IMAGE_NAME }}:${{ github.sha }}  
+        docker build --file=taskapp/taskapp/Dockerfile -t ${{ secrets.REGISTRY_USERNAME }}.azurecr.io/${{ secrets.IMAGE_NAME }}:${{ github.sha }} .
+        docker push ${{ secrets.REGISTRY_USERNAME }}.azurecr.io/${{ secrets.IMAGE_NAME }}:${{ github.sha }}  
        
   # **** UNCOMMENT IF USING DOCKER HUB **** 
     # Use docker login
@@ -56,7 +56,7 @@ jobs:
       uses: azure/webapps-container-deploy@v1
       with:
         app-name: ${{ secrets.APP_NAME }}
-        images: ${{ secrets.REGISTRY_NAME }}.azurecr.io/${{ secrets.IMAGE_NAME }}:${{ github.sha }}
+        images: ${{ secrets.REGISTRY_USERNAME }}.azurecr.io/${{ secrets.IMAGE_NAME }}:${{ github.sha }}
         
   # **** UNCOMMENT IF USING DOCKER HUB **** 
     #- name: Deploy Container to Azure App Service
