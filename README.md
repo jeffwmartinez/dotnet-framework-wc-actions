@@ -2,8 +2,8 @@
 A containerized (Windows) .NET Framework Task App setup with continuous deployment through **GitHub Actions** to Azure App Service.
 
 ## Directions
-1. To use this repository, *fork the repo* 
-2. *Provision appropriate resources* in Azure and/or Docker Hub
+1. To use this repository, *fork or clone the repo* 
+2. *Create the appropriate resources* in Azure and/or Docker Hub
 3. *Add/replace the github secrets variables with your own secrets* appropriate from each resource:<br/>
 
       - APP_NAME = your web apps name
@@ -15,4 +15,4 @@ A containerized (Windows) .NET Framework Task App setup with continuous deployme
       - REGISTRY_USERNAME = your registry username
       - REGISTRY_PASSWORD = your registry password
   
-3. *Commit changes to your master branch* that will trigger your build
+3. *Commit changes to your master branch* to trigger your build
