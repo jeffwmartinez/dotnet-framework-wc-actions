@@ -8,9 +8,9 @@ Fork this repository so you have your own copy that you can add your own GitHub 
 Create the following resources. You will need information from each resource detailed below that will be used in the file and stored in your secrets. Create your choice of registry (Azure Container Registry or Docker Hub) first since you will need information from there before you can create your App Service.  
 
 1. Azure Container Registry OR Docker Hub 
-- `CONTAINER_REGISTRY_NAME` = your registry name
+- `CONTAINER_REGISTRY_USERNAME` = your registry name
 - `CONTAINER_REGISTRY_PASSWORD` = your registry password
-- `CONTAINER_LOGIN_SERVER` = azure container registry login server
+- `CONTAINER_REGISTRY_NAME` = azure container registry login server
 2. App Service (Web App for Container) 
 - `APP_NAME` = your web apps name
 3. .NET Framework application with supporting dockerfile in a GitHub repository
