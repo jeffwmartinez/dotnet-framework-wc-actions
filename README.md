@@ -1,7 +1,7 @@
 # .NET Framework Continuous Deployment Sample
 A containerized (Windows) .NET Framework sample application setup with continuous deployment through **GitHub Actions** to Azure App Service. Follow the directions below to get started.
 
-# Fork this Repository
+## Fork this Repository
 Fork this repository so you have your own copy that you can add your own GitHub secrets to. 
 
 ## Create Resources 
