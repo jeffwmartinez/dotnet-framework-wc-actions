@@ -59,7 +59,7 @@ jobs:
     #    images: ${{ secrets.REGISTRY_USERNAME }}.azurecr.io/${{ secrets.IMAGE_NAME }}:${{ github.sha }}
 
     - name: Deploy container to Azure App Service
-      uses: azure/webapps-container-deploy@v1
+      uses: Azure/webapps-deploy@v2
       with: 
         app-name: ${{ secrets.APP_NAME }}
         publish-profile: ${{ secrets.PUBLISH_PROFILE }}
