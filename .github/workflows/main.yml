@@ -17,10 +17,10 @@ jobs:
     - uses: actions/checkout@v1
     
     # Authenticate a Service Principal to deploy to your Web App
-    - name: Azure Service Principal Authentication
-      uses: azure/login@v1
-      with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
+    #- name: Azure Service Principal Authentication
+    #  uses: azure/login@v1
+    #  with:
+    #      creds: ${{ secrets.AZURE_CREDENTIALS }}
                
     # Use docker login to log into ACR 
     - name: Docker login to ACR
@@ -67,9 +67,9 @@ jobs:
   # *************************************** 
     
     # Deploy a dacpac file to your SQL server
-    - name: Azure SQL Deploy
-      uses: Azure/sql-action@v1
-      with:
-        server-name: ${{ secrets.DATABASE_SERVER_NAME }}.database.windows.net
-        connection-string: ${{ secrets.AZURE_SQL_CONNECTION_STRING }}
-        dacpac-package: './data.dacpac'
+    #- name: Azure SQL Deploy
+    #  uses: Azure/sql-action@v1
+    #  with:
+    #    server-name: ${{ secrets.DATABASE_SERVER_NAME }}.database.windows.net
+    #    connection-string: ${{ secrets.AZURE_SQL_CONNECTION_STRING }}
+    #    dacpac-package: './data.dacpac'
