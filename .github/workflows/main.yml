@@ -52,10 +52,17 @@ jobs:
   # ***************************************      
       
     # Deploy your container to App Service 
-    - name: Deploy Container to Azure App Service
+    #- name: Deploy Container to Azure App Service
+    #  uses: azure/webapps-container-deploy@v1
+    #  with:
+    #    app-name: ${{ secrets.APP_NAME }}
+    #    images: ${{ secrets.REGISTRY_USERNAME }}.azurecr.io/${{ secrets.IMAGE_NAME }}:${{ github.sha }}
+
+    - name: Deploy container to Azure App Service
       uses: azure/webapps-container-deploy@v1
-      with:
+      with: 
         app-name: ${{ secrets.APP_NAME }}
+        publish-profile: ${{ secrets.PUBLISH_PROFILE }}
         images: ${{ secrets.REGISTRY_USERNAME }}.azurecr.io/${{ secrets.IMAGE_NAME }}:${{ github.sha }}
         
   # **** UNCOMMENT IF USING DOCKER HUB **** 
